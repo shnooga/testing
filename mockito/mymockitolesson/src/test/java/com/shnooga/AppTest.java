@@ -1,22 +1,30 @@
 package com.shnooga;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest extends TestCase
-{
+class AppTest {
     private App instance = new App();
 
-    public void testAdd() throws Exception {
+    @BeforeEach
+    void setUp() {
+    }
+
+    @Test
+    void add() {
         assertThat(instance.add( 7, 11), is("7 + 11"));
     }
 
-    public void testMultiply() throws Exception {
+    @Test
+    void multiply() {
         assertThat(instance.multiply( 7, 11), is("7 * 11"));
+    }
+
+    @Test
+    void doSomething() {
+        System.out.println("I shouldn't see this");
     }
 }
