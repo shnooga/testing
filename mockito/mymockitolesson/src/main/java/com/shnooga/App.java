@@ -1,13 +1,13 @@
 package com.shnooga;
 
-import com.shnooga.calc.Add;
+import com.shnooga.calc.Addition;
 import com.shnooga.calc.MathIntf;
-import com.shnooga.calc.Multiply;
+import com.shnooga.calc.Multiplication;
 
 public class App
 {
-    private MathIntf add = new Add<Long>();
-    private MathIntf mult = new Multiply();
+    private MathIntf add = new Addition<Long>();
+    private MathIntf mult = new Multiplication();
 
 
     public String add(long val1, long val2) {

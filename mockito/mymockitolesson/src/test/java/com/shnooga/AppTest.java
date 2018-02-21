@@ -1,10 +1,12 @@
 package com.shnooga;
 
+import com.shnooga.calc.Addition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.*;
 
 class AppTest {
     private App instance = new App();
@@ -14,17 +16,23 @@ class AppTest {
     }
 
     @Test
-    void add() {
-        assertThat(instance.add( 7, 11), is("7 + 11"));
+    void mockAdditionInstance() {
+        Addition<Long> addition = mock(Addition.class);
+        when(addition.calculate(isA(Number.class), isA(Number.class))).thenReturn("mocked");
+
+        // Mock Addition object
+        assertThat(addition.calculate(new Long(12), new Long(7)), is("mocked"));
+        // Actual Addition object used
+        assertThat(instance.add(7, 11), is("7 + 11"));
     }
 
     @Test
-    void multiply() {
-        assertThat(instance.multiply( 7, 11), is("7 * 11"));
-    }
+    void mockAddMethod() {
+        App mockApp = spy(instance);
+        doReturn("mocked").when(mockApp).add(7, 11);
 
-    @Test
-    void doSomething() {
-        System.out.println("I shouldn't see this");
+        assertThat(mockApp.add(7, 11), is("mocked"));
+        assertThat(mockApp.add(2, 2), is("2 + 2"));
+        assertThat(instance.multiply(7, 11), is("7 * 11"));
     }
 }
